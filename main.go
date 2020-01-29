@@ -12,8 +12,8 @@ func main() {
 	// Must contain uppercase, lowercase, number, and special char
 
 	// Values to work with
-	var lower = "abcdefghijklmnopqrstuvwxyz"
-	var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	const lower = "abcdefghijklmnopqrstuvwxyz"
+	const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	const special = "!@#$%&"
 
 	// https://golang.org/pkg/math/rand/
@@ -27,26 +27,34 @@ func main() {
 	// Initialize password letter string
 	s := ""
 
+	// Assign values to determine where to place
+	// number and special char in the password
+	nr := rand.Intn(11)
+	sr := rand.Intn(11)
+
 	// Generate random string of letters
-	for i := range lower {
-		if i < 12 {
+	for i := 0; i < 12; i++ {
+		r := rand.Intn(25)
+
+		// Create password
+		if i == nr {
+			s += n
+		}
+		if i == sr {
+			s += special[rand.Intn(len(special)):]
+		}
+		if r%2 == 0 {
+			// pick random lowercase
 			r := rand.Intn(25)
-			if r%2 == 0 {
-				// pick random lowercase
-				r := rand.Intn(25)
-				s += lower[r : r+1]
-			} else {
-				// pick random uppercase
-				s += upper[r : r+1]
-			}
+			s += lower[r : r+1]
+		} else {
+			// pick random uppercase
+			s += upper[r : r+1]
 		}
 	}
 
-	// Put it all together
-	var p = s + special[rand.Intn(len(special)):] + n
-
 	// Display results
-	fmt.Println("New Password:", p)
-	fmt.Println("Length:", len(p))
+	fmt.Println("New Password:", s)
+	fmt.Println("Length:", len(s))
 
 }
