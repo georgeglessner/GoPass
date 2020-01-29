@@ -21,40 +21,41 @@ func main() {
 	// if different behavior is required for each run.
 	rand.Seed(time.Now().UnixNano())
 
-	// Generate random number
+	// Generate random number for password
 	n := strconv.Itoa(rand.Intn(100))
 
-	// Initialize password letter string
-	s := ""
+	// Initialize password string
+	p := ""
 
 	// Assign values to determine where to place
 	// number and special char in the password
 	nr := rand.Intn(11)
 	sr := rand.Intn(11)
 
-	// Generate random string of letters
+	// Generate password
 	for i := 0; i < 12; i++ {
 		r := rand.Intn(25)
 
-		// Create password
 		if i == nr {
-			s += n
+			// Insert number
+			p += n
 		}
 		if i == sr {
-			s += special[rand.Intn(len(special)):]
+			// Insert special char
+			p += special[rand.Intn(len(special)):]
 		}
 		if r%2 == 0 {
-			// pick random lowercase
+			// Insert random lowercase
 			r := rand.Intn(25)
-			s += lower[r : r+1]
+			p += lower[r : r+1]
 		} else {
-			// pick random uppercase
-			s += upper[r : r+1]
+			// Insert random uppercase
+			p += upper[r : r+1]
 		}
 	}
 
 	// Display results
-	fmt.Println("New Password:", s)
-	fmt.Println("Length:", len(s))
+	fmt.Println("New Password:", p)
+	fmt.Println("Length:", len(p))
 
 }
