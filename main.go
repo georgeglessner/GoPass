@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// Password must be at least 15 chars (up to 20 right now)
+	// Password must be at least 15 chars
 	// Must contain uppercase, lowercase, number, and special char
 
 	// Values to work with
@@ -33,7 +33,8 @@ func main() {
 	sr := rand.Intn(11)
 
 	// Generate password
-	for i := 0; i < 12; i++ {
+	// 13 is used to ensure min. of 15 chars
+	for i := 0; i < 13; i++ {
 		r := rand.Intn(25)
 
 		if i == nr {
@@ -43,6 +44,7 @@ func main() {
 		if i == sr {
 			// Insert special char
 			p += special[rand.Intn(len(special)):]
+
 		}
 		if r%2 == 0 {
 			// Insert random lowercase
